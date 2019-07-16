@@ -2,3 +2,31 @@
     background: #e2e9fc;
 }
 
+.poster-container{
+    height: 100px; 
+    width: 70px;
+}
+
+.fill{
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.metacritic-box{
+    height: 20px;
+    width: 25px;
+}
+
+.good-metacritic{
+    background: green;
+}
+
+.soso-metacritic{
+    background: yellow;
+}
+
+.bad-metacritic{
+    background: red;
+}
+
+

@@ -1,10 +1,10 @@
 <template>
 <v-fade-transition>
- <v-card flat v-if="show" style="width: 100%;">
+ <v-card flat  style="width: 100%;">
          <v-card-text>
             <v-layout row>
-             <div style="height: 100px; width: 70px">
-              <img style="max-height: 100%; max-width: 100%;" :src="movie.poster"/>
+             <div class="poster-container">
+              <img class="fill" :src="movie.poster"/>
              </div>
              <v-flex>
                <v-layout row align-end style="height: 50%">
@@ -18,7 +18,7 @@
                   <span> {{movie.genre}}</span>
                
                  <span class="px-2"> {{movie.Rating}}/10 </span>
-                 <div class="text-xs-center" style="height: 20px; width: 20px; background: green">
+                 <div :class="[metacriticScore(), 'text-xs-center',  'metacritic-box']" >
                       <span> {{movie.mc}} </span> 
                 </div>
                 <div class="px-2"> {{movie.rt}} </div>
@@ -40,27 +40,30 @@
 
 <script>
     export default {
-        data(){
-           
-        },
+      
         methods: {
+            metacriticScore(){
+                if(Number(this.movie.mc) >= 69){
+                    return 'good-metacritic'
+                } else if (Number(this.movie.mc) >=49){
+                    return 'soso-metacritic'
+                } else {
+                    return 'bad-metacritic'
+                }
+            },
             updateFavoriteMovie(){
-                setTimeout(() => {
-                    this.$emit('update', this.movie.id, true, !this.movie.favorite);
-                })
+                    this.$emit('update', this.movie.id, true, !this.movie.favorite)
+               
             },
             updateMovie(){
-                setTimeout(() => {
-                    this.$emit('update', this.movie.id, true, this.movie.favorite);
-                })
+                    this.$emit('update', this.movie.id, true, this.movie.favorite)
             },
             deleteMovie(){
-                this.show = false;
-                setTimeout(() => {this.$emit('delete',  this.movie.id)}, 200);
+                this.$emit('delete',  this.movie.id)
             }
         },
         props: {
-            movie: Object,
+            movie: Object
         }
     }
 
